@@ -30,12 +30,16 @@ We have also provided some basic utility classes to help get you started with Fl
 ```js
 import {ReduceStore} from 'flux/utils';
 
-class CounterStore extends ReduceStore<number> {
+type ActionType =
+  {type: 'increment'} |
+  {type: 'square'}
+
+class CounterStore extends ReduceStore<ActionType, number> {
   getInitialState(): number {
     return 0;
   }
 
-  reduce(state: number, action: Object): number {
+  reduce(state: number, action: ActionType): number {
     switch (action.type) {
       case 'increment':
         return state + 1;
